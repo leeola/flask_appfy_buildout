@@ -1,23 +1,21 @@
 # -*- coding: utf-8 -*-
-"""
+'''
     config
     ~~~~~~
 
     Configuration settings.
 
-    :copyright: 2009 by tipfy.org.
-    :license: BSD, see LICENSE for more details.
-"""
+    :copyright: 2011 by Lee Olayvar.
+    :license: MIT, see LICENSE for more details.
+'''
 config = {}
 
-# Configurations for the 'tipfy' module.
-config['tipfy'] = {
-    # Enable debugger. It will be loaded only in development.
-    'middleware': [
-        'tipfy.ext.debugger.DebuggerMiddleware',
-    ],
-    # Enable the Hello, World! app example.
-    'apps_installed': [
+config['flask'] = {
+    # The name of the flask app to use. This is used mostly for debugging
+    # and making your app unique among others.
+    'app_name':'flask_app',
+    # Each app listed here will be registered as a Flask module object.
+    'installed_apps': [
         'apps.hello_world',
     ],
 }

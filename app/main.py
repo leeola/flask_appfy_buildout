@@ -3,7 +3,7 @@
     main
     ~~~~
 
-    Run Tipfy apps.
+    Run Flask apps.
 
     :copyright: 2011 by Lee Olayvar.
     :license: MIT, see LICENSE for more details.
@@ -16,19 +16,21 @@ if 'lib' not in sys.path:
     # and optionally to distlib loaded using zipimport.
     sys.path[0:0] = ['lib', 'distlib', 'distlib.zip']
 
-import config
-import tipfy
+from config import config
+from flask import Flask
 
 # Is this the development server?
 debug = os.environ.get('SERVER_SOFTWARE', '').startswith('Dev')
 
 # Instantiate the application.
-app = tipfy.make_wsgi_app(config=config.config, debug=debug)
-
+app = Flask(config['app_name']) 
 
 def main():
-    app.run()
-
+    # Register all of the installed apps
+    for app in config['installed_apps']:
+        flask_module = __import__('%s.module' % app)
+        app.register_module(flask_module)
+    app.run(debug=debug)
 
 if __name__ == '__main__':
     main()
