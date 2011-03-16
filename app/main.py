@@ -23,11 +23,11 @@ from flask import Flask
 debug = os.environ.get('SERVER_SOFTWARE', '').startswith('Dev')
 
 # Instantiate the application.
-app = Flask(config['app_name']) 
+app = Flask(config.get('app_name', 'flask_app')) 
 
 def main():
     # Register all of the installed apps
-    for app in config['installed_apps']:
+    for app in config.get('installed_apps', []):
         flask_module = __import__('%s.module' % app)
         app.register_module(flask_module)
     app.run(debug=debug)
