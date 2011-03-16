@@ -1,11 +1,11 @@
 *.pyc
 *.swp
 
-project/app/distlib/*
-project/bin/*
-project/etc/*
-project/var/*
+app/distlib/*
+bin/*
+etc/*
+var/*
 
-project/.installed.cfg
+.installed.cfg
 
 !README.rst
