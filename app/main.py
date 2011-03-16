@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-"""
+'''
     main
     ~~~~
 
     Run Tipfy apps.
 
-    :copyright: 2009 by tipfy.org.
-    :license: BSD, see LICENSE for more details.
-"""
+    :copyright: 2011 by Lee Olayvar.
+    :license: MIT, see LICENSE for more details.
+'''
 import os
 import sys
 
