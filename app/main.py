@@ -25,13 +25,17 @@ from flask import Flask
 debug = os.environ.get('SERVER_SOFTWARE', '').startswith('Dev')
 
 # Instantiate the application.
-app = Flask(config.get('app_name', 'flask_app')) 
+app = Flask(config['flask'].get('app_name', 'flask_app')) 
 
 def main():
     # Register all of the installed apps
-    for app_location in config.get('installed_apps', []):
-        flask_module = __import__('%s.module' % app_location)
-        app.register_module(flask_module)
+    for app_location in config['flask'].get('installed_apps', []):
+        # This seemingly weird syntax is the 'official' way to import a package
+        # and grab the tail module.
+        __import__(app_location)
+        app_module = sys.modules[app_location]
+        # Register each app.
+        app.register_module(app_module.flask_module)
     CGIHandler().run(app)
 
 if __name__ == '__main__':

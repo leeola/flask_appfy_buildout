@@ -8,18 +8,19 @@
     :copyright: 2011 by Lee Olayvar.
     :license: MIT, see LICENSE for more details.
 '''
+from flask import render_template
 
-from apps.hello_world import module
+from apps.hello_world import flask_module
 
 
-@module.route('/')
+@flask_module.route('/')
 def hello_world():
-    '''Render the hello world page.'''
-    print 'Wooo'
-    return 'Hi'
+    '''A basic hello.'''
+    return 'Hello World!'
 
-@module.route('/pretty')
+@flask_module.route('/pretty')
 def pretty_hello():
     '''A pretty hello.'''
-    pass
+    return render_template('hello_world.html',
+                           message='Hello Pretty World!')
 
