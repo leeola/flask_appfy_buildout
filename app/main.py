@@ -14,7 +14,9 @@ import sys
 if 'lib' not in sys.path:
     # Add /lib as primary libraries directory, with fallback to /distlib
     # and optionally to distlib loaded using zipimport.
-    sys.path[0:0] = ['lib', 'distlib', 'distlib.zip']
+    sys.path[0:0] = ['lib', 'distlib']
+
+from wsgiref.handlers import CGIHandler
 
 from config import config
 from flask import Flask
@@ -27,10 +29,10 @@ app = Flask(config.get('app_name', 'flask_app'))
 
 def main():
     # Register all of the installed apps
-    for app in config.get('installed_apps', []):
-        flask_module = __import__('%s.module' % app)
+    for app_location in config.get('installed_apps', []):
+        flask_module = __import__('%s.module' % app_location)
         app.register_module(flask_module)
-    app.run(debug=debug)
+    CGIHandler().run(app)
 
 if __name__ == '__main__':
     main()
