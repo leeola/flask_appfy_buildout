@@ -1,0 +1,12 @@
+*.pyc
+*.swp
+
+app/distlib/*
+bin/*
+eggs/*
+etc/*
+var/*
+
+.installed.cfg
+
+!README.rst
